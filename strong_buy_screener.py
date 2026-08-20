@@ -1,0 +1,152 @@
+"""
+Strong Buy Stock Screener (free, no API key required)
+========================================================
+
+Scans a list of tickers (default: S&P 500) and flags the ones where
+Wall Street analyst consensus is "Strong Buy", using Yahoo Finance
+data via the free `yfinance` library.
+
+SETUP (run once):
+    pip install yfinance pandas requests lxml
+
+RUN:
+    python strong_buy_screener.py
+
+OUTPUT:
+    Prints a table to the console and saves a timestamped CSV
+    (e.g. strong_buy_stocks_19_08_2026_1.csv) in the same folder.
+    Previous outputs are never overwritten; the trailing index
+    restarts at 1 each new day.
+
+NOTES:
+- yfinance pulls from Yahoo Finance's public endpoints. It's free,
+  but not official/supported by Yahoo, so it can occasionally break
+  or rate-limit you. If that happens, wait a bit and rerun, or
+  reduce MAX_TICKERS below.
+- "Strong Buy" here is inferred from Yahoo's recommendationKey field
+  (values: strong_buy, buy, hold, sell, strong_sell) plus the
+  recommendationMean score (1.0 = Strong Buy, 5.0 = Strong Sell).
+- This checks hundreds of tickers one by one, so it can take several
+  minutes. A progress counter is printed so you can see it's working.
+"""
+
+import glob
+import os
+import re
+import time
+from datetime import date
+
+import pandas as pd
+import requests
+import yfinance as yf
+
+# How many tickers to scan. Set to None to scan the full list.
+MAX_TICKERS = None
+
+# Consider a stock "Strong Buy" if Yahoo's average rating score is
+# at or below this threshold (1.0 = unanimous Strong Buy, 5.0 = Strong Sell)
+STRONG_BUY_THRESHOLD = 1.8
+
+
+def get_sp500_tickers():
+    """Pull the current S&P 500 ticker list from Wikipedia (free, no key)."""
+    url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+    # Wikipedia blocks the default Python user-agent with a 403, so fetch
+    # the page ourselves with a browser-like header, then hand the HTML
+    # text to pandas instead of letting pandas fetch the URL directly.
+    headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
+    resp = requests.get(url, headers=headers, timeout=15)
+    resp.raise_for_status()
+    tables = pd.read_html(resp.text)
+    df = tables[0]
+    tickers = df["Symbol"].str.replace(".", "-", regex=False).tolist()
+    return tickers
+
+
+def next_output_filename():
+    """Build a strong_buy_stocks_<day>_<month>_<year>_<index>.csv filename
+    that doesn't collide with an existing file, so past outputs are kept.
+    The index restarts at 1 each new day."""
+    today = date.today()
+    date_part = f"{today.day:02d}_{today.month:02d}_{today.year}"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    pattern = os.path.join(script_dir, f"strong_buy_stocks_{date_part}_*.csv")
+
+    max_index = 0
+    for path in glob.glob(pattern):
+        match = re.search(rf"strong_buy_stocks_{date_part}_(\d+)\.csv$", os.path.basename(path))
+        if match:
+            max_index = max(max_index, int(match.group(1)))
+
+    return os.path.join(script_dir, f"strong_buy_stocks_{date_part}_{max_index + 1}.csv")
+
+
+def check_ticker(ticker):
+    """Return a dict of rating info for one ticker, or None if unavailable."""
+    try:
+        info = yf.Ticker(ticker).info
+        mean = info.get("recommendationMean")
+        key = info.get("recommendationKey")
+        target = info.get("targetMeanPrice")
+        price = info.get("currentPrice") or info.get("regularMarketPrice")
+        num_analysts = info.get("numberOfAnalystOpinions")
+
+        if mean is None:
+            return None
+
+        upside = None
+        if target and price:
+            upside = round((target - price) / price * 100, 1)
+
+        return {
+            "Ticker": ticker,
+            "Company": info.get("shortName"),
+            "RecommendationKey": key,
+            "RecommendationMean": mean,
+            "NumAnalysts": num_analysts,
+            "Price": price,
+            "TargetMeanPrice": target,
+            "UpsidePct": upside,
+        }
+    except Exception:
+        return None
+
+
+def main():
+    print("Fetching S&P 500 ticker list...")
+    tickers = get_sp500_tickers()
+    if MAX_TICKERS:
+        tickers = tickers[:MAX_TICKERS]
+
+    print(f"Scanning {len(tickers)} tickers for analyst ratings...\n")
+
+    results = []
+    for i, ticker in enumerate(tickers, 1):
+        row = check_ticker(ticker)
+        if row:
+            results.append(row)
+        if i % 25 == 0 or i == len(tickers):
+            print(f"  ...checked {i}/{len(tickers)}")
+        time.sleep(0.3)  # be polite, avoid rate limits
+
+    df = pd.DataFrame(results)
+    if df.empty:
+        print("No data retrieved. Yahoo may be rate-limiting; try again shortly.")
+        return
+
+    strong_buys = df[
+        (df["RecommendationMean"] <= STRONG_BUY_THRESHOLD)
+        & (df["NumAnalysts"].fillna(0) >= 5)
+    ].sort_values("RecommendationMean")
+
+    print(f"\nFound {len(strong_buys)} Strong Buy stocks (mean rating <= {STRONG_BUY_THRESHOLD}, 5+ analysts):\n")
+    if not strong_buys.empty:
+        print(strong_buys.to_string(index=False))
+
+    output_path = next_output_filename()
+    strong_buys.to_csv(output_path, index=False)
+    print(f"\nSaved full results to {os.path.basename(output_path)}")
+
+
+if __name__ == "__main__":
+    main()
