@@ -1,0 +1,16 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+NVDA,NVIDIA Corporation,strong_buy,1.29032,59,214.72,304.72882,41.9
+CRDO,Credo Technology Group Holding ,strong_buy,1.31579,19,230.57,283.23447,22.8
+AVGO,Broadcom Inc.,strong_buy,1.33333,45,368.45,527.88446,43.3
+MU,"Micron Technology, Inc.",strong_buy,1.3617,44,966.78,1515.1136,56.7
+ASML,ASML Holding N.V. - New York Re,strong_buy,1.40909,15,1763.76,2195.9126,24.5
+TSM,Taiwan Semiconductor Manufactur,strong_buy,1.42105,18,418.95,554.45483,32.3
+MRVL,"Marvell Technology, Inc.",strong_buy,1.44186,40,237.04,259.9142,9.6
+ADI,"Analog Devices, Inc.",strong_buy,1.45455,30,373.09,466.0,24.9
+LRCX,Lam Research Corporation,strong_buy,1.45714,31,314.0,371.35483,18.3
+AMAT,"Applied Materials, Inc.",strong_buy,1.46154,35,492.32,641.02856,30.2
+AMD,"Advanced Micro Devices, Inc.",strong_buy,1.4717,48,473.25,613.0917,29.5
+MCHP,Microchip Technology Incorporat,buy,1.56,24,76.08,109.20833,43.5
+TER,"Teradyne, Inc.",buy,1.58824,15,375.74,449.8,19.7
+MTSI,MACOM Technology Solutions Hold,buy,1.6,14,266.61,399.64285,49.9
+ENTG,"Entegris, Inc.",buy,1.75,11,143.66,173.36365,20.7

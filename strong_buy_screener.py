@@ -11,10 +11,15 @@ SETUP (run once):
 
 RUN:
     python strong_buy_screener.py
+    python strong_buy_screener.py --category semiconductor
+
+    --category sets which ticker universe to scan:
+        sp500          S&P 500 constituents (default)
+        semiconductor  SOXX (iShares Semiconductor ETF) holdings
 
 OUTPUT:
     Prints a table to the console and saves a timestamped CSV
-    (e.g. strong_buy_stocks_19_08_2026_1.csv) in the same folder.
+    (e.g. strong_buy_stocks_sp500_19_08_2026_1.csv) in the same folder.
     Previous outputs are never overwritten; the trailing index
     restarts at 1 each new day.
 
@@ -30,6 +35,7 @@ NOTES:
   minutes. A progress counter is printed so you can see it's working.
 """
 
+import argparse
 import glob
 import os
 import re
@@ -63,22 +69,42 @@ def get_sp500_tickers():
     return tickers
 
 
-def next_output_filename():
-    """Build a strong_buy_stocks_<day>_<month>_<year>_<index>.csv filename
-    that doesn't collide with an existing file, so past outputs are kept.
-    The index restarts at 1 each new day."""
+def get_semiconductor_tickers():
+    """Pull current SOXX (iShares Semiconductor ETF) holdings from
+    stockanalysis.com (free, no key)."""
+    url = "https://stockanalysis.com/etf/soxx/holdings/"
+    headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
+    resp = requests.get(url, headers=headers, timeout=15)
+    resp.raise_for_status()
+    tables = pd.read_html(resp.text)
+    df = tables[0]
+    tickers = df["Symbol"].str.replace(".", "-", regex=False).tolist()
+    return tickers
+
+
+CATEGORIES = {
+    "sp500": get_sp500_tickers,
+    "semiconductor": get_semiconductor_tickers,
+}
+
+
+def next_output_filename(category):
+    """Build a strong_buy_stocks_<category>_<day>_<month>_<year>_<index>.csv
+    filename that doesn't collide with an existing file, so past outputs are
+    kept. The index restarts at 1 each new day per category."""
     today = date.today()
     date_part = f"{today.day:02d}_{today.month:02d}_{today.year}"
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    pattern = os.path.join(script_dir, f"strong_buy_stocks_{date_part}_*.csv")
+    prefix = f"strong_buy_stocks_{category}_{date_part}"
+    pattern = os.path.join(script_dir, f"{prefix}_*.csv")
 
     max_index = 0
     for path in glob.glob(pattern):
-        match = re.search(rf"strong_buy_stocks_{date_part}_(\d+)\.csv$", os.path.basename(path))
+        match = re.search(rf"{prefix}_(\d+)\.csv$", os.path.basename(path))
         if match:
             max_index = max(max_index, int(match.group(1)))
 
-    return os.path.join(script_dir, f"strong_buy_stocks_{date_part}_{max_index + 1}.csv")
+    return os.path.join(script_dir, f"{prefix}_{max_index + 1}.csv")
 
 
 def check_ticker(ticker):
@@ -112,9 +138,23 @@ def check_ticker(ticker):
         return None
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Strong Buy stock screener")
+    parser.add_argument(
+        "--category",
+        choices=sorted(CATEGORIES),
+        default="sp500",
+        help="Ticker universe to scan (default: sp500)",
+    )
+    return parser.parse_args()
+
+
 def main():
-    print("Fetching S&P 500 ticker list...")
-    tickers = get_sp500_tickers()
+    args = parse_args()
+    category = args.category
+
+    print(f"Fetching {category} ticker list...")
+    tickers = CATEGORIES[category]()
     if MAX_TICKERS:
         tickers = tickers[:MAX_TICKERS]
 
@@ -143,7 +183,7 @@ def main():
     if not strong_buys.empty:
         print(strong_buys.to_string(index=False))
 
-    output_path = next_output_filename()
+    output_path = next_output_filename(category)
     strong_buys.to_csv(output_path, index=False)
     print(f"\nSaved full results to {os.path.basename(output_path)}")
 
