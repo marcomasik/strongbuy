@@ -1,0 +1,10 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+TTE.PA,TOTALENERGIES,strong_buy,1.0,22,77.44,81.60698,5.4
+DVN,Devon Energy Corporation,strong_buy,1.33333,26,49.1,59.38462,20.9
+WMB,"Williams Companies, Inc. (The)",strong_buy,1.5,20,70.49,85.25,20.9
+CVE.TO,CENOVUS ENERGY INC.,strong_buy,1.5,17,45.39,49.73529,9.6
+TRGP,"Targa Resources, Inc.",buy,1.52174,21,299.1,306.85715,2.6
+SLB,SLB Limited,buy,1.6,29,53.87,61.93103,15.0
+COP,ConocoPhillips,buy,1.64,24,134.87,144.29167,7.0
+BKR,Baker Hughes Company,buy,1.70833,23,62.34,71.91304,15.4
+CVX,Chevron Corporation,buy,1.72,24,205.27,217.875,6.1

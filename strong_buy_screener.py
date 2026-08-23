@@ -17,6 +17,7 @@ RUN:
         sp500          S&P 500 constituents (default)
         semiconductor  SOXX (iShares Semiconductor ETF) holdings
         nuclear        NLR (VanEck Uranium+Nuclear Energy ETF) holdings
+        oil-gas        IXC (iShares Global Energy ETF) holdings
 
 OUTPUT:
     Prints a table to the console and saves a timestamped CSV
@@ -93,6 +94,8 @@ EXCHANGE_SUFFIX = {
     "HKG": "HK",
     "KRX": "KS",
     "HEL": "HE",
+    "EPA": "PA",
+    "BIT": "MI",
 }
 
 
@@ -122,10 +125,24 @@ def get_nuclear_tickers():
     return [t for t in tickers if t]
 
 
+def get_oil_gas_tickers():
+    """Pull current IXC (iShares Global Energy ETF) holdings from
+    stockanalysis.com (free, no key), translated to Yahoo-style tickers."""
+    url = "https://stockanalysis.com/etf/ixc/holdings/"
+    headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
+    resp = requests.get(url, headers=headers, timeout=15)
+    resp.raise_for_status()
+    tables = pd.read_html(resp.text)
+    df = tables[0]
+    tickers = [normalize_ticker(s) for s in df["Symbol"]]
+    return [t for t in tickers if t]
+
+
 CATEGORIES = {
     "sp500": get_sp500_tickers,
     "semiconductor": get_semiconductor_tickers,
     "nuclear": get_nuclear_tickers,
+    "oil-gas": get_oil_gas_tickers,
 }
 
 
