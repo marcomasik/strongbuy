@@ -19,6 +19,7 @@ RUN:
         nuclear        NLR (VanEck Uranium+Nuclear Energy ETF) holdings
         oil-gas        IXC (iShares Global Energy ETF) holdings
         clean-energy   ICLN (iShares Global Clean Energy ETF) holdings
+        drone          DRNZ (REX Drone ETF) holdings
 
 OUTPUT:
     Prints a table to the console and saves a timestamped CSV
@@ -106,6 +107,7 @@ EXCHANGE_SUFFIX = {
     "NSE": "NS",
     "ETR": "DE",
     "BME": "MC",
+    "CSE": "CN",
 }
 
 
@@ -161,12 +163,26 @@ def get_clean_energy_tickers():
     return [t for t in tickers if t]
 
 
+def get_drone_tickers():
+    """Pull current DRNZ (REX Drone ETF) holdings from stockanalysis.com
+    (free, no key), translated to Yahoo-style tickers."""
+    url = "https://stockanalysis.com/etf/drnz/holdings/"
+    headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
+    resp = requests.get(url, headers=headers, timeout=15)
+    resp.raise_for_status()
+    tables = pd.read_html(resp.text)
+    df = tables[0]
+    tickers = [normalize_ticker(s) for s in df["Symbol"].dropna()]
+    return [t for t in tickers if t]
+
+
 CATEGORIES = {
     "sp500": get_sp500_tickers,
     "semiconductor": get_semiconductor_tickers,
     "nuclear": get_nuclear_tickers,
     "oil-gas": get_oil_gas_tickers,
     "clean-energy": get_clean_energy_tickers,
+    "drone": get_drone_tickers,
 }
 
 
