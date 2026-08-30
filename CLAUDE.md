@@ -1,5 +1,25 @@
 # strong_buy_screener
 
+## Working mode (FastAPI/SQLite/frontend build-out)
+
+While building out the backend (FastAPI), database (SQLite), and any
+frontend on top of `strong_buy_screener.py`:
+
+- Work in small, incremental steps — one step per turn, not a batch of
+  steps done in one go. Each step should deliver something concrete and
+  working, even if it's not visible/exciting (e.g. "the DB schema exists
+  and the scan results are being written to it").
+- Before starting a step, if anything about scope or approach is
+  ambiguous, ask rather than assume.
+- After finishing a step, stop and wait for confirmation/direction before
+  moving to the next one — don't chain multiple steps together.
+- Keep the core screener logic (scraping, rating checks, category
+  functions in `strong_buy_screener.py`) loosely coupled from the
+  DB/API/frontend layers. The Python screening logic is expected to keep
+  evolving (new categories, new fields, etc.) — the DB schema and API
+  contract should be stable enough to absorb that without breaking the
+  frontend or requiring coordinated changes across all layers at once.
+
 ## Adding a new ETF category
 
 Categories are added one at a time (see git history: semiconductor, nuclear,
