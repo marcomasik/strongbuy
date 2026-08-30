@@ -23,9 +23,9 @@ RUN:
 
 OUTPUT:
     Prints a table to the console and saves a timestamped CSV
-    (e.g. strong_buy_stocks_sp500_19_08_2026_1.csv) in the same folder.
-    Previous outputs are never overwritten; the trailing index
-    restarts at 1 each new day.
+    (e.g. data/sp500/strong_buy_stocks_sp500_19_08_2026_1.csv) under
+    data/<category>/. Previous outputs are never overwritten; the
+    trailing index restarts at 1 each new day.
 
 NOTES:
 - yfinance pulls from Yahoo Finance's public endpoints. It's free,
@@ -187,14 +187,16 @@ CATEGORIES = {
 
 
 def next_output_filename(category):
-    """Build a strong_buy_stocks_<category>_<day>_<month>_<year>_<index>.csv
+    """Build a data/<category>/strong_buy_stocks_<category>_<day>_<month>_<year>_<index>.csv
     filename that doesn't collide with an existing file, so past outputs are
     kept. The index restarts at 1 each new day per category."""
     today = date.today()
     date_part = f"{today.day:02d}_{today.month:02d}_{today.year}"
     script_dir = os.path.dirname(os.path.abspath(__file__))
+    category_dir = os.path.join(script_dir, "data", category)
+    os.makedirs(category_dir, exist_ok=True)
     prefix = f"strong_buy_stocks_{category}_{date_part}"
-    pattern = os.path.join(script_dir, f"{prefix}_*.csv")
+    pattern = os.path.join(category_dir, f"{prefix}_*.csv")
 
     max_index = 0
     for path in glob.glob(pattern):
@@ -202,7 +204,7 @@ def next_output_filename(category):
         if match:
             max_index = max(max_index, int(match.group(1)))
 
-    return os.path.join(script_dir, f"{prefix}_{max_index + 1}.csv")
+    return os.path.join(category_dir, f"{prefix}_{max_index + 1}.csv")
 
 
 def check_ticker(ticker):
