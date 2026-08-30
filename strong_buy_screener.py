@@ -12,6 +12,7 @@ SETUP (run once):
 RUN:
     python strong_buy_screener.py
     python strong_buy_screener.py --category semiconductor
+    python strong_buy_screener.py --category all
 
     --category sets which ticker universe to scan:
         sp500          S&P 500 constituents (default)
@@ -20,6 +21,7 @@ RUN:
         oil-gas        IXC (iShares Global Energy ETF) holdings
         clean-energy   ICLN (iShares Global Clean Energy ETF) holdings
         drone          DRNZ (REX Drone ETF) holdings
+        all            run every category above, one after another
 
 OUTPUT:
     Prints a table to the console and saves a timestamped CSV
@@ -242,17 +244,16 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Strong Buy stock screener")
     parser.add_argument(
         "--category",
-        choices=sorted(CATEGORIES),
+        choices=sorted(CATEGORIES) + ["all"],
         default="sp500",
-        help="Ticker universe to scan (default: sp500)",
+        help="Ticker universe to scan, or 'all' to scan every category (default: sp500)",
     )
     return parser.parse_args()
 
 
-def main():
-    args = parse_args()
-    category = args.category
-
+def run_scan(category):
+    """Scan one category end to end: fetch tickers, check ratings, print
+    and save the Strong Buy results."""
     print(f"Fetching {category} ticker list...")
     tickers = CATEGORIES[category]()
     if MAX_TICKERS:
@@ -286,6 +287,18 @@ def main():
     output_path = next_output_filename(category)
     strong_buys.to_csv(output_path, index=False)
     print(f"\nSaved full results to {os.path.basename(output_path)}")
+
+
+def main():
+    args = parse_args()
+    category = args.category
+
+    if category == "all":
+        for cat in sorted(CATEGORIES):
+            print(f"\n{'=' * 60}\nCategory: {cat}\n{'=' * 60}")
+            run_scan(cat)
+    else:
+        run_scan(category)
 
 
 if __name__ == "__main__":
