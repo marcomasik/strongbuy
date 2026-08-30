@@ -24,9 +24,11 @@ RUN:
         all            run every category above, one after another
 
 OUTPUT:
-    Prints a table to the console and saves a timestamped CSV
-    (e.g. data/sp500/strong_buy_stocks_sp500_19_08_2026_1.csv) under
-    data/<category>/. Previous outputs are never overwritten; the
+    Prints a table to the console, records the run in the SQLite
+    database (data/screener.db: one `scans` row plus one `scan_results`
+    row per ticker checked, not just Strong Buy qualifiers), and saves a
+    timestamped CSV (e.g. data/sp500/strong_buy_stocks_sp500_19_08_2026_1.csv)
+    under data/<category>/. Previous outputs are never overwritten; the
     trailing index restarts at 1 each new day.
 
 NOTES:
@@ -51,6 +53,8 @@ from datetime import date
 import pandas as pd
 import requests
 import yfinance as yf
+
+import db
 
 # How many tickers to scan. Set to None to scan the full list.
 MAX_TICKERS = None
@@ -274,6 +278,9 @@ def run_scan(category):
     if df.empty:
         print("No data retrieved. Yahoo may be rate-limiting; try again shortly.")
         return
+
+    scan_id = db.record_scan(category, results)
+    print(f"Recorded scan #{scan_id} ({len(results)} tickers) in {os.path.basename(db.DB_PATH)}")
 
     strong_buys = df[
         (df["RecommendationMean"] <= STRONG_BUY_THRESHOLD)

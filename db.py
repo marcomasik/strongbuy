@@ -14,6 +14,7 @@ RUN (creates/updates the schema, safe to run repeatedly):
 
 import os
 import sqlite3
+from datetime import datetime
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "screener.db")
 
@@ -56,6 +57,55 @@ def init_db():
     )
     conn.commit()
     conn.close()
+
+
+def record_scan(category, results, run_at=None):
+    """Insert one scan run and its per-ticker result rows.
+
+    `results` is the list of dicts the screener's check_ticker() returns
+    (keys: "Ticker", "Company", "RecommendationKey", "RecommendationMean",
+    "NumAnalysts", "Price", "TargetMeanPrice", "UpsidePct"). Every ticker
+    that returned data is stored, not just Strong Buy qualifiers.
+
+    Returns the new scans.id.
+    """
+    if run_at is None:
+        run_at = datetime.now().isoformat(timespec="seconds")
+
+    init_db()
+    conn = get_connection()
+    try:
+        scan_id = conn.execute(
+            "INSERT INTO scans (category, run_at) VALUES (?, ?)",
+            (category, run_at),
+        ).lastrowid
+        conn.executemany(
+            """
+            INSERT INTO scan_results (
+                scan_id, ticker, company, recommendation_key,
+                recommendation_mean, num_analysts, price,
+                target_mean_price, upside_pct
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            [
+                (
+                    scan_id,
+                    row.get("Ticker"),
+                    row.get("Company"),
+                    row.get("RecommendationKey"),
+                    row.get("RecommendationMean"),
+                    row.get("NumAnalysts"),
+                    row.get("Price"),
+                    row.get("TargetMeanPrice"),
+                    row.get("UpsidePct"),
+                )
+                for row in results
+            ],
+        )
+        conn.commit()
+        return scan_id
+    finally:
+        conn.close()
 
 
 if __name__ == "__main__":
