@@ -1,0 +1,16 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+NVDA,NVIDIA Corporation,strong_buy,1.27869,58,217.55,323.41898,48.7
+MPWR,"Monolithic Power Systems, Inc.",strong_buy,1.3125,14,1256.26,1842.6428,46.7
+CRDO,Credo Technology Group Holding ,strong_buy,1.31579,19,232.75,283.23447,21.7
+AVGO,Broadcom Inc.,strong_buy,1.32653,46,368.79,525.97394,42.6
+MU,"Micron Technology, Inc.",strong_buy,1.3617,44,932.86,1513.409,62.2
+ADI,"Analog Devices, Inc.",strong_buy,1.38235,32,361.78,470.25,30.0
+MRVL,"Marvell Technology, Inc.",strong_buy,1.40909,41,216.62,278.8919,28.7
+ASML,ASML Holding N.V. - New York Re,strong_buy,1.4186,16,1696.16,2142.8894,26.3
+LRCX,Lam Research Corporation,strong_buy,1.45714,31,301.9,371.19354,23.0
+AMAT,"Applied Materials, Inc.",strong_buy,1.46154,35,461.67,640.3143,38.7
+AMD,"Advanced Micro Devices, Inc.",strong_buy,1.48148,49,465.58,613.8449,31.8
+MCHP,Microchip Technology Incorporat,buy,1.53846,25,72.93,108.64,49.0
+TER,"Teradyne, Inc.",buy,1.64706,15,354.97,446.46667,25.8
+MTSI,MACOM Technology Solutions Hold,buy,1.6875,15,265.27,395.33334,49.0
+ENTG,"Entegris, Inc.",buy,1.75,11,134.92,173.36365,28.5
