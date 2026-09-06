@@ -10,12 +10,13 @@ RUN (from the project root):
 Then:
     http://127.0.0.1:8000/health
     http://127.0.0.1:8000/categories
+    http://127.0.0.1:8000/stocks?category=nuclear
     http://127.0.0.1:8000/docs   (interactive API docs)
 """
 
 import sqlite3
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 
 from db import DB_PATH, init_db
 
@@ -47,3 +48,38 @@ def categories():
     """Distinct categories that have at least one recorded scan."""
     rows = query("SELECT DISTINCT category FROM scans ORDER BY category")
     return {"categories": [r["category"] for r in rows]}
+
+
+@app.get("/stocks")
+def stocks(category: str = Query(..., description="Category name, e.g. 'nuclear'")):
+    """Every ticker checked in the most recent scan for `category`.
+
+    Returns all rows recorded for that scan, not just Strong Buy
+    qualifiers. If the category has no recorded scans, returns an empty
+    list with run_at = null (HTTP 200, not 404).
+    """
+    latest = query(
+        "SELECT id, run_at FROM scans WHERE category = ? "
+        "ORDER BY run_at DESC, id DESC LIMIT 1",
+        (category,),
+    )
+    if not latest:
+        return {"category": category, "run_at": None, "count": 0, "stocks": []}
+
+    scan = latest[0]
+    rows = query(
+        """
+        SELECT ticker, company, recommendation_key, recommendation_mean,
+               num_analysts, price, target_mean_price, upside_pct
+        FROM scan_results
+        WHERE scan_id = ?
+        ORDER BY upside_pct DESC
+        """,
+        (scan["id"],),
+    )
+    return {
+        "category": category,
+        "run_at": scan["run_at"],
+        "count": len(rows),
+        "stocks": rows,
+    }
