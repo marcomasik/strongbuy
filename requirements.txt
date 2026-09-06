@@ -1,0 +1,9 @@
+# Screener core (strong_buy_screener.py)
+pandas
+requests
+lxml
+yfinance
+
+# API layer (api.py)
+fastapi==0.128.8
+uvicorn[standard]==0.39.0
