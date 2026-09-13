@@ -15,6 +15,7 @@ Then:
 """
 
 import sqlite3
+from typing import Optional
 
 from fastapi import FastAPI, Query
 
@@ -50,19 +51,42 @@ def categories():
     return {"categories": [r["category"] for r in rows]}
 
 
-@app.get("/stocks")
-def stocks(category: str = Query(..., description="Category name, e.g. 'nuclear'")):
-    """Every ticker checked in the most recent scan for `category`.
-
-    Returns all rows recorded for that scan, not just Strong Buy
-    qualifiers. If the category has no recorded scans, returns an empty
-    list with run_at = null (HTTP 200, not 404).
-    """
-    latest = query(
+@app.get("/scans")
+def scans(category: str = Query(..., description="Category name, e.g. 'nuclear'")):
+    """Every recorded scan date for `category`, newest first."""
+    rows = query(
         "SELECT id, run_at FROM scans WHERE category = ? "
-        "ORDER BY run_at DESC, id DESC LIMIT 1",
+        "ORDER BY run_at DESC, id DESC",
         (category,),
     )
+    return {"category": category, "scans": rows}
+
+
+@app.get("/stocks")
+def stocks(
+    category: str = Query(..., description="Category name, e.g. 'nuclear'"),
+    scan_id: Optional[int] = Query(
+        None, description="Specific scan id (see /scans). Defaults to the latest scan."
+    ),
+):
+    """Every ticker checked in a scan for `category`.
+
+    Returns all rows recorded for that scan, not just Strong Buy
+    qualifiers. Defaults to the most recent scan; pass `scan_id` (from
+    /scans) to fetch an older one. If the category has no recorded
+    scans, returns an empty list with run_at = null (HTTP 200, not 404).
+    """
+    if scan_id is not None:
+        latest = query(
+            "SELECT id, run_at FROM scans WHERE id = ? AND category = ?",
+            (scan_id, category),
+        )
+    else:
+        latest = query(
+            "SELECT id, run_at FROM scans WHERE category = ? "
+            "ORDER BY run_at DESC, id DESC LIMIT 1",
+            (category,),
+        )
     if not latest:
         return {"category": category, "run_at": None, "count": 0, "stocks": []}
 
