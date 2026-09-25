@@ -1,0 +1,9 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+ONDS,Ondas Inc,strong_buy,1.22222,9.0,7.23,19.41667,168.6
+RCAT,"Red Cat Holdings, Inc.",strong_buy,1.375,8.0,7.96,16.75,110.4
+FLT.TO,VOLATUS AEROSPACE INC,strong_buy,1.4,5.0,0.63,0.95,50.8
+GE,GE Aerospace,strong_buy,1.45455,21.0,323.66,404.90475,25.1
+HWM,Howmet Aerospace Inc.,strong_buy,1.45455,20.0,229.61,337.128,46.8
+BA,Boeing Company (The),buy,1.53571,26.0,210.45,274.84616,30.6
+AVAV,"AeroVironment, Inc.",buy,1.6,19.0,146.71,224.39842,53.0
+AVEX,AEVEX Corp.,buy,1.66667,8.0,16.08,33.625,109.1

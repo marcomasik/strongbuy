@@ -31,6 +31,12 @@ function formatCell(key, value) {
   }
 }
 
+function fetchScans(category) {
+  return fetch(`/api/scans?category=${encodeURIComponent(category)}`).then(
+    (r) => r.json(),
+  )
+}
+
 export default function App() {
   const [categories, setCategories] = useState([])
   const [category, setCategory] = useState(null)
@@ -38,6 +44,7 @@ export default function App() {
   const [scanId, setScanId] = useState(null)
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
+  const [scanStatus, setScanStatus] = useState(null)
 
   // Load the category list once on mount.
   useEffect(() => {
@@ -56,8 +63,7 @@ export default function App() {
     if (!category) return
     setScans([])
     setScanId(null)
-    fetch(`/api/scans?category=${encodeURIComponent(category)}`)
-      .then((r) => r.json())
+    fetchScans(category)
       .then((body) => {
         setScans(body.scans)
         if (body.scans.length > 0) setScanId(body.scans[0].id)
@@ -77,6 +83,45 @@ export default function App() {
       .then(setData)
       .catch((e) => setError(String(e)))
   }, [category, scanId])
+
+  // While a scan is running, poll its status. When it finishes, refresh
+  // the date list (and select the new scan) so the new data shows up.
+  useEffect(() => {
+    if (!scanStatus?.running) return
+    const scanningCategory = scanStatus.category
+    const interval = setInterval(() => {
+      fetch('/api/scans/status')
+        .then((r) => r.json())
+        .then((status) => {
+          setScanStatus(status)
+          if (!status.running) {
+            clearInterval(interval)
+            if (!status.error && scanningCategory === category) {
+              fetchScans(category).then((body) => {
+                setScans(body.scans)
+                if (body.scans.length > 0) setScanId(body.scans[0].id)
+              })
+            }
+          }
+        })
+        .catch((e) => setError(String(e)))
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [scanStatus, category])
+
+  function runScan() {
+    if (!category) return
+    setError(null)
+    fetch(`/api/scans/run?category=${encodeURIComponent(category)}`, {
+      method: 'POST',
+    })
+      .then(async (r) => {
+        const body = await r.json()
+        if (!r.ok) throw new Error(body.detail ?? 'Failed to start scan')
+        setScanStatus(body)
+      })
+      .catch((e) => setError(String(e)))
+  }
 
   return (
     <div className="screener">
@@ -113,7 +158,28 @@ export default function App() {
             ))}
           </select>
         </label>
+
+        <button
+          type="button"
+          className="scan-button"
+          onClick={runScan}
+          disabled={!category || scanStatus?.running}
+        >
+          {scanStatus?.running ? 'Scanning…' : 'Scan now'}
+        </button>
       </div>
+
+      {scanStatus?.running && (
+        <p className="screener__meta">
+          Scanning {scanStatus.category}… (started{' '}
+          {scanStatus.started_at?.replace('T', ' ')})
+        </p>
+      )}
+      {scanStatus && !scanStatus.running && scanStatus.error && (
+        <p className="screener__error">
+          Scan of {scanStatus.category} failed: {scanStatus.error}
+        </p>
+      )}
 
       {error && <p className="screener__error">Error: {error}</p>}
 

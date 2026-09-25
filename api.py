@@ -15,15 +15,33 @@ Then:
 """
 
 import sqlite3
+import threading
+from datetime import datetime
 from typing import Optional
 
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, HTTPException, Query
 
 from db import DB_PATH, init_db
+from strong_buy_screener import CATEGORIES, run_scan
 
 app = FastAPI(title="strong_buy_screener API")
 
 init_db()  # ensure data/screener.db and its schema exist on a fresh checkout
+
+# In-memory state for the one scan that's allowed to run at a time. Lost on
+# server restart, which is fine: it only tracks the current run, not history
+# (history lives in the DB via db.record_scan).
+_scan_lock = threading.Lock()
+_scan_state = {"running": False, "category": None, "started_at": None, "error": None}
+
+
+def _run_scan_in_background(category):
+    try:
+        run_scan(category)
+    except Exception as e:
+        _scan_state["error"] = str(e)
+    finally:
+        _scan_state["running"] = False
 
 
 def query(sql, params=()):
@@ -107,3 +125,38 @@ def stocks(
         "count": len(rows),
         "stocks": rows,
     }
+
+
+@app.get("/scans/status")
+def scan_status():
+    """Current state of the (at most one) in-progress scan."""
+    return dict(_scan_state)
+
+
+@app.post("/scans/run")
+def scan_run(category: str = Query(..., description="Category name, e.g. 'nuclear'")):
+    """Kick off a scan for `category` in a background thread.
+
+    Only one scan may run at a time (across all categories) since the
+    screener scrapes Yahoo Finance live and shouldn't be hammered with
+    overlapping requests. Returns 409 if a scan is already running, 404
+    if `category` isn't a known category.
+    """
+    if category not in CATEGORIES:
+        raise HTTPException(status_code=404, detail=f"Unknown category: {category}")
+
+    with _scan_lock:
+        if _scan_state["running"]:
+            raise HTTPException(
+                status_code=409,
+                detail=f"A scan for '{_scan_state['category']}' is already running",
+            )
+        _scan_state["running"] = True
+        _scan_state["category"] = category
+        _scan_state["started_at"] = datetime.now().isoformat(timespec="seconds")
+        _scan_state["error"] = None
+        threading.Thread(
+            target=_run_scan_in_background, args=(category,), daemon=True
+        ).start()
+
+    return dict(_scan_state)

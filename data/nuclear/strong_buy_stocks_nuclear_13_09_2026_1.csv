@@ -1,0 +1,11 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+DML.TO,DENISON MINES CORP.,strong_buy,1.0,13,4.19,6.41923,53.2
+UUUU,Energy Fuels Inc,strong_buy,1.125,5,12.95,24.15,86.5
+YCA.L,YELLOW CAKE PLC ORD GBP0.01,strong_buy,1.125,8,560.5,753.866,34.5
+1164.HK,CGN MINING,strong_buy,1.25,8,2.28,3.85875,69.2
+ISO.TO,ISOENERGY LTD,strong_buy,1.28571,7,14.75,23.12857,56.8
+KAP.L,,strong_buy,1.42857,14,29.4,92.76034,215.5
+NXE.TO,NEXGEN ENERGY LTD,buy,1.53333,15,13.63,21.35,56.6
+CCJ,Cameco Corporation,buy,1.54545,12,96.68,130.59079,35.1
+UEC,Uranium Energy Corp.,buy,1.6,10,10.45,17.375,66.3
+BWXT,"BWX Technologies, Inc.",buy,1.64706,15,150.12,228.88467,52.5

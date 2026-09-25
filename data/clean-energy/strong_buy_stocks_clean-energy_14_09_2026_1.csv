@@ -1,0 +1,10 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+EQTL3.SA,EQUATORIAL  ON  ATZ NM,strong_buy,1.35714,14,38.76,52.50429,35.5
+SUZLON.NS,SUZLON ENERGY LIMITED,strong_buy,1.38462,13,44.12,62.25846,41.1
+CWEN,"Clearway Energy, Inc.",strong_buy,1.38462,13,30.205,42.07692,39.3
+600025.SS,HUANENG LANCANG RIVER HYDROPOWE,strong_buy,1.42857,5,9.89,10.222,3.4
+600900.SS,CHINA YANGTZE POWER CO,strong_buy,1.4375,12,28.63,32.7575,14.4
+NXT,Nextpower Inc.,strong_buy,1.44828,28,82.46,140.60715,70.5
+ENGI11.SA,ENERGISA    UNT     N2,strong_buy,1.5,13,50.24,65.54077,30.5
+EDP.LS,"EDP, SA",buy,1.68182,22,4.609,5.21591,13.2
+NDX1.DE,Nordex SE                     I,buy,1.73333,15,37.92,49.30667,30.0
