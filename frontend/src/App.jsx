@@ -45,6 +45,7 @@ export default function App() {
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
   const [scanStatus, setScanStatus] = useState(null)
+  const [scanAll, setScanAll] = useState(false)
 
   // Load the category list once on mount.
   useEffect(() => {
@@ -53,6 +54,17 @@ export default function App() {
       .then((body) => {
         setCategories(body.categories)
         if (body.categories.length > 0) setCategory(body.categories[0])
+      })
+      .catch((e) => setError(String(e)))
+  }, [])
+
+  // Pick up a scan that's already running, so reloading the page mid-scan
+  // still shows the progress and keeps the button locked.
+  useEffect(() => {
+    fetch('/api/scans/status')
+      .then((r) => r.json())
+      .then((status) => {
+        if (status.running) setScanStatus(status)
       })
       .catch((e) => setError(String(e)))
   }, [])
@@ -88,7 +100,6 @@ export default function App() {
   // the date list (and select the new scan) so the new data shows up.
   useEffect(() => {
     if (!scanStatus?.running) return
-    const scanningCategory = scanStatus.category
     const interval = setInterval(() => {
       fetch('/api/scans/status')
         .then((r) => r.json())
@@ -96,7 +107,7 @@ export default function App() {
           setScanStatus(status)
           if (!status.running) {
             clearInterval(interval)
-            if (!status.error && scanningCategory === category) {
+            if (!status.error) {
               fetchScans(category).then((body) => {
                 setScans(body.scans)
                 if (body.scans.length > 0) setScanId(body.scans[0].id)
@@ -112,7 +123,8 @@ export default function App() {
   function runScan() {
     if (!category) return
     setError(null)
-    fetch(`/api/scans/run?category=${encodeURIComponent(category)}`, {
+    const target = scanAll ? 'all' : category
+    fetch(`/api/scans/run?category=${encodeURIComponent(target)}`, {
       method: 'POST',
     })
       .then(async (r) => {
@@ -125,7 +137,7 @@ export default function App() {
 
   return (
     <div className="screener">
-      <div className="screener__crumbs">Strong Buy Screener</div>
+      <h1 className="screener__crumbs">Strong Buy Screener</h1>
 
       <div className="screener__controls">
         <label className="select-control">
@@ -167,6 +179,20 @@ export default function App() {
         >
           {scanStatus?.running ? 'Scanning…' : 'Scan now'}
         </button>
+
+        <label className="scan-all">
+          <input
+            className="scan-all__input"
+            type="checkbox"
+            checked={scanAll}
+            onChange={(e) => setScanAll(e.target.checked)}
+            disabled={scanStatus?.running}
+          />
+          Scan all
+        </label>
+        <div className="scan-all__decoration"></div>
+        <div className="scan-all__decoration"></div>
+        <div className="scan-all__decoration"></div>
       </div>
 
       {scanStatus?.running && (

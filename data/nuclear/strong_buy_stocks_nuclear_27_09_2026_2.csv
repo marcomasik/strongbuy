@@ -1,0 +1,11 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+UUUU,Energy Fuels Inc,strong_buy,1.125,5,11.35,24.15,112.8
+YCA.L,YELLOW CAKE PLC ORD GBP0.01,strong_buy,1.125,8,543.5,782.64246,44.0
+ISO.TO,ISOENERGY LTD,strong_buy,1.28571,7,13.3,23.12857,73.9
+KAP.L,,strong_buy,1.42857,14,29.4,94.18162,220.3
+CEG,Constellation Energy Corporatio,buy,1.54545,20,263.27,347.282,31.9
+NXE.TO,NEXGEN ENERGY LTD,buy,1.5625,16,13.02,21.42188,64.5
+CCJ,Cameco Corporation,buy,1.57143,11,88.07,127.650085,44.9
+BWXT,"BWX Technologies, Inc.",buy,1.61111,16,138.47,222.06938,60.4
+NNE,Nano Nuclear Energy Inc.,buy,1.625,7,16.99,37.57143,121.1
+DML.TO,DENISON MINES CORP.,buy,1.66667,14,3.75,6.46071,72.3

@@ -37,7 +37,12 @@ _scan_state = {"running": False, "category": None, "started_at": None, "error": 
 
 def _run_scan_in_background(category):
     try:
-        run_scan(category)
+        if category == "all":
+            for cat in sorted(CATEGORIES):
+                _scan_state["category"] = cat
+                run_scan(cat)
+        else:
+            run_scan(category)
     except Exception as e:
         _scan_state["error"] = str(e)
     finally:
@@ -137,12 +142,16 @@ def scan_status():
 def scan_run(category: str = Query(..., description="Category name, e.g. 'nuclear'")):
     """Kick off a scan for `category` in a background thread.
 
+    Pass category='all' to scan every category one after another (same
+    as the CLI's --category all); `_scan_state["category"]` then tracks
+    whichever one is currently being scanned.
+
     Only one scan may run at a time (across all categories) since the
     screener scrapes Yahoo Finance live and shouldn't be hammered with
     overlapping requests. Returns 409 if a scan is already running, 404
     if `category` isn't a known category.
     """
-    if category not in CATEGORIES:
+    if category != "all" and category not in CATEGORIES:
         raise HTTPException(status_code=404, detail=f"Unknown category: {category}")
 
     with _scan_lock:
