@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 const COLUMNS = [
   { key: 'ticker', label: 'Ticker' },
@@ -31,6 +31,21 @@ function formatCell(key, value) {
   }
 }
 
+// Sorts a copy of the rows by one column. Empty values always go last,
+// whichever direction is chosen, so they never crowd the top of the table.
+function sortRows(rows, key, dir) {
+  const sign = dir === 'asc' ? 1 : -1
+  return [...rows].sort((a, b) => {
+    const x = a[key]
+    const y = b[key]
+    const xEmpty = x === null || x === undefined
+    const yEmpty = y === null || y === undefined
+    if (xEmpty || yEmpty) return xEmpty - yEmpty
+    if (typeof x === 'number' && typeof y === 'number') return (x - y) * sign
+    return String(x).localeCompare(String(y)) * sign
+  })
+}
+
 function fetchScans(category) {
   return fetch(`/api/scans?category=${encodeURIComponent(category)}`).then(
     (r) => r.json(),
@@ -46,6 +61,23 @@ export default function App() {
   const [error, setError] = useState(null)
   const [scanStatus, setScanStatus] = useState(null)
   const [scanAll, setScanAll] = useState(false)
+  // Lowest recommendation mean is the strongest buy, so that's the default.
+  const [sort, setSort] = useState({ key: 'recommendation_mean', dir: 'asc' })
+
+  const sortedStocks = useMemo(
+    () => (data ? sortRows(data.stocks, sort.key, sort.dir) : []),
+    [data, sort],
+  )
+
+  // Clicking the active column flips its direction; any other column
+  // starts ascending.
+  function toggleSort(key) {
+    setSort((prev) =>
+      prev.key === key
+        ? { key, dir: prev.dir === 'asc' ? 'desc' : 'asc' }
+        : { key, dir: 'asc' },
+    )
+  }
 
   // Load the category list once on mount.
   useEffect(() => {
@@ -218,15 +250,41 @@ export default function App() {
             <table className="stock-table">
               <thead>
                 <tr>
-                  {COLUMNS.map((col) => (
-                    <th key={col.key} className="stock-table__head-cell">
-                      {col.label}
-                    </th>
-                  ))}
+                  {COLUMNS.map((col) => {
+                    const active = sort.key === col.key
+                    return (
+                      <th
+                        key={col.key}
+                        className="stock-table__head-cell"
+                        aria-sort={
+                          active
+                            ? sort.dir === 'asc'
+                              ? 'ascending'
+                              : 'descending'
+                            : 'none'
+                        }
+                      >
+                        <button
+                          type="button"
+                          className="stock-table__sort-button"
+                          onClick={() => toggleSort(col.key)}
+                        >
+                          {col.label}
+                          <svg
+                            className={`stock-table__chevron${active ? ' active' : ''}${active && sort.dir === 'desc' ? ' desc' : ''}`}
+                            viewBox="0 0 10 10"
+                            aria-hidden="true"
+                          >
+                            <path d="M2 6.5 5 3.5l3 3" />
+                          </svg>
+                        </button>
+                      </th>
+                    )
+                  })}
                 </tr>
               </thead>
               <tbody>
-                {data.stocks.map((row, i) => (
+                {sortedStocks.map((row, i) => (
                   <tr key={row.ticker ?? i} className="stock-table__row">
                     {COLUMNS.map((col) => (
                       <td key={col.key} className="stock-table__cell">

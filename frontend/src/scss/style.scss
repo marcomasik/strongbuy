@@ -152,6 +152,50 @@ body {
       white-space: nowrap;
     }
 
+    &__sort-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0;
+      border: 0;
+      background: none;
+      font: inherit;
+      color: inherit;
+      letter-spacing: inherit;
+      text-transform: inherit;
+      cursor: pointer;
+    }
+
+    &__sort-button:hover {
+      color: #1f2430;
+    }
+
+    &__sort-button:focus-visible {
+      outline: none;
+      color: #6b7cff;
+    }
+
+    &__chevron {
+      width: 10px;
+      height: 10px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.35;
+      transition: transform 0.15s;
+    }
+
+    &__chevron.active {
+      opacity: 1;
+      color: #1f2430;
+    }
+
+    &__chevron.desc {
+      transform: rotate(180deg);
+    }
+
     &__cell {
       padding: 10px 12px;
       border-bottom: 1px solid #f0f1f3;
