@@ -7,11 +7,11 @@
 
   <key>ProgramArguments</key>
   <array>
-    <string>/Users/marcomasik/Desktop/Marco dolgai/strong_buy_screener/scripts/daily_scan.sh</string>
+    <string>/Users/marcomasik/Projects/strong_buy_screener/scripts/daily_scan.sh</string>
   </array>
 
   <key>WorkingDirectory</key>
-  <string>/Users/marcomasik/Desktop/Marco dolgai/strong_buy_screener</string>
+  <string>/Users/marcomasik/Projects/strong_buy_screener</string>
 
   <!-- Weekdays (1 = Monday … 5 = Friday) at 23:00, after the US close. -->
   <key>StartCalendarInterval</key>
@@ -52,6 +52,6 @@
   <!-- The wrapper sends the scan's own output to data/logs/scan_<date>.log.
        This catches failures that happen before that redirect exists. -->
   <key>StandardErrorPath</key>
-  <string>/Users/marcomasik/Desktop/Marco dolgai/strong_buy_screener/data/logs/launchd.err</string>
+  <string>/Users/marcomasik/Projects/strong_buy_screener/data/logs/launchd.err</string>
 </dict>
 </plist>
