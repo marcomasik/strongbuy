@@ -285,7 +285,15 @@ export default function App() {
               </thead>
               <tbody>
                 {sortedStocks.map((row, i) => (
-                  <tr key={row.ticker ?? i} className="stock-table__row">
+                  <tr
+                    key={row.ticker ?? i}
+                    className={`stock-table__row${row.rating_jump ? ' jump' : ''}`}
+                    title={
+                      row.rating_jump
+                        ? `Rating improved ${formatCell('recommendation_mean', row.prev_recommendation_mean)} → ${formatCell('recommendation_mean', row.recommendation_mean)} since the scan on ${formatDate(data.previous_run_at)}`
+                        : undefined
+                    }
+                  >
                     {COLUMNS.map((col) => (
                       <td key={col.key} className="stock-table__cell">
                         {formatCell(col.key, row[col.key])}

@@ -1,0 +1,17 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+AVGO,Broadcom Inc.,strong_buy,1.26,47,351.19,531.8468,51.4
+NVDA,NVIDIA Corporation,strong_buy,1.29508,59,228.38,327.7,43.5
+CRDO,Credo Technology Group Holding ,strong_buy,1.35,20,194.79,281.0931,44.3
+MU,"Micron Technology, Inc.",strong_buy,1.36735,46,1065.11,1520.7609,42.8
+TSM,Taiwan Semiconductor Manufactur,strong_buy,1.38095,20,456.19,552.2594,21.1
+ASML,ASML Holding N.V. - New York Re,strong_buy,1.40476,16,1811.67,2111.0266,16.5
+ADI,"Analog Devices, Inc.",strong_buy,1.41176,32,396.71,470.71875,18.7
+MRVL,"Marvell Technology, Inc.",strong_buy,1.41304,43,264.21,290.9704,10.1
+AMAT,"Applied Materials, Inc.",strong_buy,1.45,36,511.38,638.94446,24.9
+LRCX,Lam Research Corporation,strong_buy,1.45714,31,328.51,373.7742,13.8
+SKHY,SK hynix Inc.,strong_buy,1.46667,14,184.15,252.2143,37.0
+AMD,"Advanced Micro Devices, Inc.",strong_buy,1.49091,50,611.76,618.508,1.1
+MCHP,Microchip Technology Incorporat,buy,1.53846,25,77.77,107.84,38.7
+MTSI,MACOM Technology Solutions Hold,buy,1.5625,15,284.82,395.33334,38.8
+TER,"Teradyne, Inc.",buy,1.64706,15,400.91,446.46667,11.4
+NXPI,NXP Semiconductors N.V.,buy,1.8,29,237.53,311.10345,31.0

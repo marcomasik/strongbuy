@@ -1,0 +1,11 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+UUUU,Energy Fuels Inc,strong_buy,1.125,5,11.03,24.15,118.9
+ISO.TO,ISOENERGY LTD,strong_buy,1.28571,7,12.66,23.12857,82.7
+KAP.L,,strong_buy,1.42857,14,29.4,94.52304,221.5
+DML.TO,DENISON MINES CORP.,strong_buy,1.5,14,3.69,6.46071,75.1
+CEG,Constellation Energy Corporatio,buy,1.54545,20,254.02,347.282,36.7
+NXE.TO,NEXGEN ENERGY LTD,buy,1.5625,16,12.97,21.42188,65.2
+CCJ,Cameco Corporation,buy,1.57143,11,86.67,126.960365,46.5
+UEC,Uranium Energy Corp.,buy,1.6,10,9.45,16.83,78.1
+BWXT,"BWX Technologies, Inc.",buy,1.61111,16,137.0,220.19438,60.7
+NNE,Nano Nuclear Energy Inc.,buy,1.625,7,15.85,37.57143,137.0

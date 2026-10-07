@@ -1,0 +1,181 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+WYNN,"Wynn Resorts, Limited",strong_buy,1.19048,20.0,78.23,132.005,68.7
+TTWO,"Take-Two Interactive Software, ",strong_buy,1.2069,29.0,202.78,286.4417,41.3
+AVGO,Broadcom Inc.,strong_buy,1.26,47.0,355.1,531.8468,49.8
+FLEX,Flex Ltd.,strong_buy,1.27273,10.0,113.83,160.5,41.0
+ANET,"Arista Networks, Inc.",strong_buy,1.29032,28.0,202.86,241.92892,19.3
+SW,Smurfit WestRock plc,strong_buy,1.29412,16.0,44.38,56.90625,28.2
+NVDA,NVIDIA Corporation,strong_buy,1.29508,59.0,227.21,327.7,44.2
+CRH,CRH PLC,strong_buy,1.30435,24.0,84.53,133.16875,57.5
+DVN,Devon Energy Corporation,strong_buy,1.31034,28.0,46.6,60.39286,29.6
+DAL,"Delta Air Lines, Inc.",strong_buy,1.32,24.0,84.87,102.9375,21.3
+UAL,"United Airlines Holdings, Inc.",strong_buy,1.32,23.0,112.65,156.34782,38.8
+DXCM,"DexCom, Inc.",strong_buy,1.32143,25.0,86.64,94.48,9.0
+AMZN,"Amazon.com, Inc.",strong_buy,1.32203,57.0,246.67,329.5393,33.6
+MSFT,Microsoft Corporation,strong_buy,1.32727,52.0,508.96,577.26135,13.4
+SPGI,S&P Global Inc.,strong_buy,1.33333,20.0,392.45,520.3,32.6
+TRMB,Trimble Inc.,strong_buy,1.33333,10.0,57.34,79.5,38.6
+SNPS,"Synopsys, Inc.",strong_buy,1.33333,25.0,415.09,553.7712,33.4
+VST,Vistra Corp.,strong_buy,1.35,19.0,140.83,217.57895,54.5
+WST,"West Pharmaceutical Services, I",strong_buy,1.35294,16.0,376.63,407.5625,8.2
+CDNS,"Cadence Design Systems, Inc.",strong_buy,1.36,26.0,324.17,405.47116,25.1
+TRGP,"Targa Resources, Inc.",strong_buy,1.36364,21.0,273.49,325.14285,18.9
+MU,"Micron Technology, Inc.",strong_buy,1.36735,46.0,1065.08,1520.7609,42.8
+WMB,"Williams Companies, Inc. (The)",strong_buy,1.375,23.0,68.63,85.6087,24.7
+GOOGL,Alphabet Inc.,strong_buy,1.37705,54.0,340.92,429.36295,25.9
+VRT,"Vertiv Holdings, LLC",strong_buy,1.37931,27.0,248.34,338.22223,36.2
+GOOG,Alphabet Inc.,strong_buy,1.38333,15.0,337.32,422.336,25.2
+XEL,Xcel Energy Inc.,strong_buy,1.38889,17.0,70.69,91.41176,29.3
+JBL,Jabil Inc.,strong_buy,1.4,9.0,318.84,427.33334,34.0
+CVS,CVS Health Corporation,strong_buy,1.40741,25.0,87.1,116.28,33.5
+ADI,"Analog Devices, Inc.",strong_buy,1.41176,32.0,398.22,470.71875,18.2
+MRVL,"Marvell Technology, Inc.",strong_buy,1.41304,43.0,263.27,290.9704,10.5
+WAB,Westinghouse Air Brake Technolo,strong_buy,1.41667,12.0,291.23,329.58334,13.2
+CBRE,CBRE Group Inc,strong_buy,1.41667,12.0,130.84,182.16667,39.2
+META,"Meta Platforms, Inc.",strong_buy,1.41935,57.0,738.79,793.90735,7.5
+MA,Mastercard Incorporated,strong_buy,1.425,37.0,563.58,666.7138,18.3
+NOW,"ServiceNow, Inc.",strong_buy,1.42857,46.0,129.94,144.99261,11.6
+IQV,"IQVIA Holdings, Inc.",strong_buy,1.42857,18.0,268.99,283.55557,5.4
+HWM,Howmet Aerospace Inc.,strong_buy,1.43478,21.0,230.94,334.36,44.8
+DLR,"Digital Realty Trust, Inc.",strong_buy,1.44118,32.0,176.56,223.4375,26.6
+APH,Amphenol Corporation,strong_buy,1.44444,18.0,84.34,99.38889,17.8
+V,Visa Inc.,strong_buy,1.45,37.0,365.88,419.36163,14.6
+AMAT,"Applied Materials, Inc.",strong_buy,1.45,36.0,512.01,638.94446,24.8
+PWR,"Quanta Services, Inc.",strong_buy,1.45161,29.0,651.79,769.0407,18.0
+LRCX,Lam Research Corporation,strong_buy,1.45714,31.0,323.86,373.7742,15.4
+EQT,EQT Corporation,strong_buy,1.46154,26.0,48.88,67.5,38.1
+AZO,"AutoZone, Inc.",strong_buy,1.46429,24.0,2875.97,3708.7083,29.0
+ICE,Intercontinental Exchange Inc.,strong_buy,1.46667,14.0,152.19,187.2857,23.1
+HAS,"Hasbro, Inc.",strong_buy,1.46667,14.0,88.26,109.5,24.1
+GLW,Corning Incorporated,strong_buy,1.47059,16.0,158.71,189.9375,19.7
+BLK,"BlackRock, Inc.",strong_buy,1.47059,16.0,1067.94,1322.75,23.9
+FANG,"Diamondback Energy, Inc.",strong_buy,1.48387,29.0,183.95,234.51724,27.5
+DIS,Walt Disney Company (The),strong_buy,1.48485,32.0,105.41,126.61406,20.1
+AMD,"Advanced Micro Devices, Inc.",strong_buy,1.49091,50.0,607.57,618.508,1.8
+LITE,Lumentum Holdings Inc.,strong_buy,1.5,26.0,973.49,1157.071,18.9
+TKO,"TKO Group Holdings, Inc.",strong_buy,1.5,19.0,177.58,231.42105,30.3
+EQIX,"Equinix, Inc.",strong_buy,1.5,31.0,1015.27,1233.4839,21.5
+NWSA,News Corporation,strong_buy,1.5,8.0,28.52,36.1625,26.8
+MSCI,MSCI Inc.,strong_buy,1.5,17.0,539.76,691.7647,28.2
+ETN,"Eaton Corporation, PLC",strong_buy,1.5,26.0,433.27,480.47192,10.9
+BAC,Bank of America Corporation,strong_buy,1.5,21.0,54.96,68.61905,24.9
+DHR,Danaher Corporation,strong_buy,1.5,23.0,226.11,230.8261,2.1
+DDOG,"Datadog, Inc.",strong_buy,1.5,46.0,268.56,286.25696,6.6
+BA,Boeing Company (The),strong_buy,1.5,26.0,187.68,273.1154,45.5
+BKNG,Booking Holdings Inc. Common St,buy,1.51282,37.0,162.34,238.78378,47.1
+TMO,Thermo Fisher Scientific Inc,buy,1.51724,27.0,679.61,653.1111,-3.9
+ABT,Abbott Laboratories,buy,1.51852,25.0,100.95,120.2636,19.1
+SNDK,Sandisk Corporation,buy,1.52,24.0,1729.76,2136.5417,23.5
+AMT,American Tower Corporation (REI,buy,1.52,23.0,167.35,215.73914,28.9
+RL,Ralph Lauren Corporation,buy,1.52632,17.0,355.92,446.70587,25.5
+SRE,DBA Sempra,buy,1.52632,18.0,78.18,99.91667,27.8
+ADSK,"Autodesk, Inc.",buy,1.52778,34.0,203.18,307.54147,51.4
+CAH,"Cardinal Health, Inc.",buy,1.52941,15.0,223.91,270.33334,20.7
+NI,NiSource Inc,buy,1.53333,14.0,39.32,49.57143,26.1
+WMT,Walmart Inc.,buy,1.53488,40.0,106.8,127.425,19.3
+EXE,Expand Energy Corporation,buy,1.53571,27.0,84.18,125.51852,49.1
+MCHP,Microchip Technology Incorporat,buy,1.53846,25.0,78.78,107.84,36.9
+GEV,GE Vernova Inc.,buy,1.54054,32.0,962.49,1237.7266,28.6
+ECL,Ecolab Inc.,buy,1.54167,21.0,277.87,324.9524,16.9
+GE,GE Aerospace,buy,1.54545,21.0,317.89,397.2857,25.0
+CEG,Constellation Energy Corporatio,buy,1.54545,20.0,264.58,347.282,31.3
+AVY,Avery Dennison Corporation,buy,1.54545,10.0,170.78,201.8,18.2
+TYL,"Tyler Technologies, Inc.",buy,1.54545,22.0,316.26,424.77274,34.3
+P,"Everpure, Inc.",buy,1.55,19.0,130.05,145.3158,11.7
+XYZ,"Block, Inc.",buy,1.55319,42.0,74.05,98.36357,32.8
+BG,Bunge Limited,buy,1.55556,9.0,108.14,141.77779,31.1
+NRG,"NRG Energy, Inc.",buy,1.5625,16.0,97.17,188.5625,94.1
+COF,Capital One Financial Corporati,buy,1.56522,21.0,196.46,258.33334,31.5
+NEM,Newmont Corporation,buy,1.56522,21.0,117.09,137.07143,17.1
+UBER,"Uber Technologies, Inc.",buy,1.56863,47.0,69.36,100.77319,45.3
+APP,Applovin Corporation,buy,1.57576,31.0,305.66,497.04547,62.6
+UNH,UnitedHealth Group Incorporated,buy,1.57692,25.0,374.94,481.72,28.5
+DOV,Dover Corporation,buy,1.57895,19.0,189.7,243.78947,28.5
+IP,International Paper Company,buy,1.58333,11.0,33.32,47.90909,43.8
+KEYS,Keysight Technologies Inc.,buy,1.58333,12.0,360.65,415.08334,15.1
+ORLY,"O'Reilly Automotive, Inc.",buy,1.58621,26.0,86.07,107.34615,24.7
+CCL,Carnival Corporation Ltd.,buy,1.58621,26.0,25.11,34.02692,35.5
+KKR,KKR & Co. Inc.,buy,1.59091,20.0,93.18,128.67,38.1
+SLB,SLB Limited,buy,1.6,29.0,49.87,62.41379,25.2
+BALL,Ball Corporation,buy,1.6,14.0,56.65,72.57143,28.1
+CASY,"Caseys General Stores, Inc.",buy,1.6,19.0,599.9,790.5263,31.8
+ORCL,Oracle Corporation,buy,1.60465,41.0,137.79,237.97415,72.7
+VTR,"Ventas, Inc.",buy,1.6087,22.0,86.91,101.81818,17.2
+COHR,Coherent Corp.,buy,1.6087,22.0,292.21,415.36197,42.1
+CFG,"Citizens Financial Group, Inc.",buy,1.61111,17.0,63.89,80.64706,26.2
+RCL,Royal Caribbean Cruises Ltd.,buy,1.62069,27.0,260.67,350.44443,34.4
+EW,Edwards Lifesciences Corporatio,buy,1.62069,26.0,88.08,100.96154,14.6
+GM,General Motors Company,buy,1.625,23.0,80.47,104.21739,29.5
+LLY,Eli Lilly and Company,buy,1.63333,29.0,1184.63,1328.8337,12.2
+WELL,Welltower Inc.,buy,1.63636,22.0,232.9,262.04544,12.5
+LYV,"Live Nation Entertainment, Inc.",buy,1.64,24.0,171.09,201.95833,18.0
+MSI,"Motorola Solutions, Inc.",buy,1.64286,11.0,446.12,526.9091,18.1
+DASH,"DoorDash, Inc.",buy,1.64444,43.0,187.1,256.2642,37.0
+BSX,Boston Scientific Corporation,buy,1.64516,29.0,43.88,61.0,39.0
+TER,"Teradyne, Inc.",buy,1.64706,15.0,403.02,446.46667,10.8
+NUE,Nucor Corporation,buy,1.64706,16.0,236.24,283.3125,19.9
+MCK,McKesson Corporation,buy,1.64706,14.0,864.82,979.3571,13.2
+APTV,Aptiv PLC,buy,1.65,18.0,43.37,66.61111,53.6
+HOOD,"Robinhood Markets, Inc.",buy,1.65517,27.0,116.22,131.07925,12.8
+VRTX,Vertex Pharmaceuticals Incorpor,buy,1.65625,28.0,526.73,571.3929,8.5
+IRM,Iron Mountain Incorporated (Del,buy,1.66667,11.0,111.5,144.90909,30.0
+EFX,"Equifax, Inc.",buy,1.66667,21.0,140.83,213.04762,51.3
+AXON,"Axon Enterprise, Inc.",buy,1.66667,19.0,419.58,704.1053,67.8
+FITB,Fifth Third Bancorp,buy,1.66667,20.0,50.97,62.65,22.9
+SYK,Stryker Corporation,buy,1.67857,25.0,278.77,369.0,32.4
+LIN,Linde plc,buy,1.67857,25.0,473.37,542.6,14.6
+TMUS,"T-Mobile US, Inc.",buy,1.67857,25.0,162.98,243.52,49.4
+WAT,Waters Corporation,buy,1.68,24.0,443.26,444.79166,0.3
+C,"Citigroup, Inc.",buy,1.68182,20.0,130.8,154.9,18.4
+TEL,TE Connectivity plc,buy,1.68421,19.0,212.59,248.57895,16.9
+CPAY,"Corpay, Inc.",buy,1.6875,15.0,392.7,461.0,17.4
+PM,Philip Morris International Inc,buy,1.6875,15.0,193.9,208.13333,7.3
+PPL,PPL Corporation,buy,1.6875,16.0,32.58,40.125,23.2
+CRWD,"CrowdStrike Holdings, Inc.",buy,1.69811,50.0,262.74,235.67,-10.3
+ABBV,AbbVie Inc.,buy,1.7,28.0,263.29,278.85715,5.9
+GILD,"Gilead Sciences, Inc.",buy,1.7037,26.0,151.28,158.65385,4.9
+CRL,Charles River Laboratories Inte,buy,1.70588,14.0,295.96,301.2857,1.8
+BKR,Baker Hughes Company,buy,1.70833,24.0,55.92,72.04167,28.8
+MCO,Moody's Corporation,buy,1.70833,21.0,454.82,561.9048,23.5
+PANW,"Palo Alto Networks, Inc.",buy,1.70909,50.0,388.41,396.12,2.0
+COR,"Cencora, Inc.",buy,1.71429,12.0,307.6,369.25,20.0
+UNP,Union Pacific Corporation,buy,1.72,24.0,274.15,329.33334,20.1
+CVX,Chevron Corporation,buy,1.72,24.0,204.38,224.33333,9.8
+LH,Labcorp Holdings Inc.,buy,1.72222,16.0,308.81,344.8125,11.7
+SCHW,Charles Schwab Corporation (The,buy,1.72727,20.0,99.1,125.45,26.6
+AJG,Arthur J. Gallagher & Co.,buy,1.72727,18.0,227.75,289.66666,27.2
+PH,Parker-Hannifin Corporation,buy,1.73077,24.0,970.37,1158.4137,19.4
+ETR,Entergy Corporation,buy,1.73913,20.0,99.76,122.675,23.0
+COP,ConocoPhillips,buy,1.74074,25.0,125.44,146.08,16.5
+CRM,"Salesforce, Inc.",buy,1.74074,53.0,225.31,281.0783,24.8
+AME,"AMETEK, Inc.",buy,1.75,18.0,250.78,278.33334,11.0
+WM,"Waste Management, Inc.",buy,1.75,25.0,206.44,259.92,25.9
+AEE,Ameren Corporation,buy,1.75,15.0,100.25,119.53333,19.2
+GEHC,GE HealthCare Technologies Inc.,buy,1.75,19.0,66.46,83.05263,25.0
+HBAN,Huntington Bancshares Incorpora,buy,1.75,19.0,15.27,19.75263,29.4
+JKHY,"Jack Henry & Associates, Inc.",buy,1.75,18.0,146.22,190.38889,30.2
+HAL,Halliburton Company,buy,1.75,25.0,31.54,43.44,37.7
+MRK,"Merck & Company, Inc.",buy,1.75,26.0,149.28,154.61539,3.6
+MDT,Medtronic plc.,buy,1.75,24.0,87.09,104.83333,20.4
+KO,Coca-Cola Company (The),buy,1.75,23.0,86.84,94.65217,9.0
+IFF,International Flavors & Fragran,buy,1.75,17.0,85.25,96.29412,13.0
+CIEN,Ciena Corporation,buy,1.75,19.0,354.92,516.83234,45.6
+CI,The Cigna Group,buy,1.75,24.0,275.26,341.83334,24.2
+ROST,"Ross Stores, Inc.",buy,1.75,18.0,234.4,270.55557,15.4
+TDY,Teledyne Technologies Incorpora,buy,1.75,12.0,605.59,758.0833,25.2
+CHRW,"C.H. Robinson Worldwide, Inc.",buy,1.76,25.0,149.71,197.56,32.0
+WTW,Willis Towers Watson Public Lim,buy,1.7619,19.0,288.57,378.57895,31.2
+CTVA,"Corteva, Inc.",buy,1.7619,20.0,77.87,92.6,18.9
+GNRC,Generac Holdlings Inc.,buy,1.7619,16.0,212.22,289.25,36.3
+NDAQ,"Nasdaq, Inc.",buy,1.76471,15.0,91.85,109.66667,19.4
+CMG,"Chipotle Mexican Grill, Inc.",buy,1.77143,31.0,31.88,43.91935,37.8
+URI,"United Rentals, Inc.",buy,1.77273,21.0,1014.54,1269.3334,25.1
+PNC,"PNC Financial Services Group, I",buy,1.77273,20.0,221.65,276.975,25.0
+SYF,Synchrony Financial,buy,1.78261,23.0,71.72,89.43478,24.7
+A,"Agilent Technologies, Inc.",buy,1.78261,21.0,175.03,175.42857,0.2
+FCX,"Freeport-McMoRan, Inc.",buy,1.78261,22.0,70.79,72.77273,2.8
+FDX,FedEx Corporation,buy,1.78571,26.0,287.47,355.14203,23.5
+ULTA,"Ulta Beauty, Inc.",buy,1.78571,25.0,547.89,630.64,15.1
+NXPI,NXP Semiconductors N.V.,buy,1.8,29.0,236.47,311.10345,31.6
+VRSN,"VeriSign, Inc.",buy,1.8,5.0,279.84,324.4,15.9
+CDW,CDW Corporation,buy,1.8,9.0,129.71,158.66667,22.3

@@ -26,6 +26,12 @@ from strong_buy_screener import CATEGORIES, run_scan
 
 app = FastAPI(title="strong_buy_screener API")
 
+# A ticker "jumps" when its recommendation mean improves (drops, since
+# 1.0 = Strong Buy) by at least this much versus the category's previous scan,
+# and enough analysts cover it that one changed opinion can't cause it alone.
+RATING_JUMP_THRESHOLD = 0.1
+RATING_JUMP_MIN_ANALYSTS = 3
+
 init_db()  # ensure data/screener.db and its schema exist on a fresh checkout
 
 # In-memory state for the one scan that's allowed to run at a time. Lost on
@@ -114,19 +120,40 @@ def stocks(
         return {"category": category, "run_at": None, "count": 0, "stocks": []}
 
     scan = latest[0]
+    previous = query(
+        "SELECT id, run_at FROM scans WHERE category = ? "
+        "AND (run_at < ? OR (run_at = ? AND id < ?)) "
+        "ORDER BY run_at DESC, id DESC LIMIT 1",
+        (category, scan["run_at"], scan["run_at"], scan["id"]),
+    )
+    previous_scan = previous[0] if previous else None
+
     rows = query(
         """
         SELECT ticker, company, recommendation_key, recommendation_mean,
-               num_analysts, price, target_mean_price, upside_pct
-        FROM scan_results
+               num_analysts, price, target_mean_price, upside_pct,
+               (SELECT p.recommendation_mean FROM scan_results p
+                WHERE p.scan_id = ? AND p.ticker = r.ticker
+                LIMIT 1) AS prev_recommendation_mean
+        FROM scan_results r
         WHERE scan_id = ?
         ORDER BY upside_pct DESC
         """,
-        (scan["id"],),
+        (previous_scan["id"] if previous_scan else None, scan["id"]),
     )
+    for row in rows:
+        now, before = row["recommendation_mean"], row["prev_recommendation_mean"]
+        row["rating_jump"] = (
+            now is not None
+            and before is not None
+            and (row["num_analysts"] or 0) >= RATING_JUMP_MIN_ANALYSTS
+            # round() so float noise can't push an exact match under the line
+            and round(before - now, 6) >= RATING_JUMP_THRESHOLD
+        )
     return {
         "category": category,
         "run_at": scan["run_at"],
+        "previous_run_at": previous_scan["run_at"] if previous_scan else None,
         "count": len(rows),
         "stocks": rows,
     }

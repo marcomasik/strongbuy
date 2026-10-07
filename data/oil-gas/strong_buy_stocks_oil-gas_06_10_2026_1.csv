@@ -1,0 +1,9 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+DVN,Devon Energy Corporation,strong_buy,1.31034,28,48.02,60.64286,26.3
+TRGP,"Targa Resources, Inc.",strong_buy,1.36364,21,285.72,325.4762,13.9
+WMB,"Williams Companies, Inc. (The)",strong_buy,1.4,24,72.39,85.45833,18.1
+SLB,SLB Limited,buy,1.6,29,50.0,62.48276,25.0
+PBR,Petroleo Brasileiro S.A. Petrob,buy,1.64286,14,23.8,23.30714,-2.1
+BKR,Baker Hughes Company,buy,1.68,24,57.13,71.16667,24.6
+CVX,Chevron Corporation,buy,1.72,24,207.58,224.625,8.2
+COP,ConocoPhillips,buy,1.78571,26,129.35,146.07692,12.9

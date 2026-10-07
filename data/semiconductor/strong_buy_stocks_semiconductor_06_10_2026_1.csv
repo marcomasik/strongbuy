@@ -1,0 +1,19 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+AVGO,Broadcom Inc.,strong_buy,1.26,47,375.81,531.3149,41.4
+NVDA,NVIDIA Corporation,strong_buy,1.29508,59,239.24,328.71695,37.4
+CRDO,Credo Technology Group Holding ,strong_buy,1.35,20,220.83,279.0931,26.4
+MPWR,"Monolithic Power Systems, Inc.",strong_buy,1.35294,15,1473.69,1839.8,24.8
+MU,"Micron Technology, Inc.",strong_buy,1.36735,46,1045.56,1535.5652,46.9
+TSM,Taiwan Semiconductor Manufactur,strong_buy,1.38095,20,482.3,555.0094,15.1
+ASML,ASML Holding N.V. - New York Re,strong_buy,1.40476,16,1834.1,2111.0564,15.1
+ADI,"Analog Devices, Inc.",strong_buy,1.41176,32,420.55,470.71875,11.9
+MRVL,"Marvell Technology, Inc.",strong_buy,1.43478,43,287.01,293.87738,2.4
+AMAT,"Applied Materials, Inc.",strong_buy,1.45,36,530.27,638.94446,20.5
+LRCX,Lam Research Corporation,strong_buy,1.45714,31,333.89,375.64517,12.5
+AMD,"Advanced Micro Devices, Inc.",strong_buy,1.49091,50,649.42,636.208,-2.0
+SKHY,SK hynix Inc.,buy,1.53333,14,182.56,252.2143,38.2
+MCHP,Microchip Technology Incorporat,buy,1.53846,25,81.26,107.84,32.7
+MTSI,MACOM Technology Solutions Hold,buy,1.5625,15,350.67,395.33334,12.7
+TER,"Teradyne, Inc.",buy,1.70588,15,430.32,446.46667,3.8
+ENTG,"Entegris, Inc.",buy,1.75,11,166.89,173.36365,3.9
+NXPI,NXP Semiconductors N.V.,buy,1.8,29,244.38,310.51724,27.1

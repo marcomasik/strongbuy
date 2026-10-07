@@ -205,6 +205,28 @@ body {
     &__row:hover {
       background: #fafbfc;
     }
+
+    // Pen-highlighter stroke over rows whose rating jumped (see api.py
+    // RATING_JUMP_THRESHOLD). Drawn as an overlay with multiply blending so
+    // the text stays dark underneath, without touching the cells' layout.
+    &__row.jump {
+      position: relative;
+    }
+
+    &__row.jump::after {
+      content: '';
+      position: absolute;
+      inset: 5px 2px;
+      border-radius: 0.8em 0.3em;
+      background-image: linear-gradient(
+        to right,
+        rgba(255, 225, 0, 0.1),
+        rgba(0, 255, 4, 0.7) 4%,
+        rgba(0, 255, 42, 0.3)
+      );
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
   }
 
   @media (max-width: 600px) {

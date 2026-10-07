@@ -1,0 +1,8 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+ONDS,Ondas Inc,strong_buy,1.22222,9,7.42,19.41667,161.7
+HWM,Howmet Aerospace Inc.,strong_buy,1.43478,21,229.57,331.50287,44.4
+FLT.TO,VOLATUS AEROSPACE INC,strong_buy,1.5,6,0.55,0.94167,71.2
+BA,Boeing Company (The),strong_buy,1.5,26,192.72,273.42307,41.9
+GE,GE Aerospace,buy,1.54545,21,306.34,396.8095,29.5
+AVAV,"AeroVironment, Inc.",buy,1.6,19,139.3,219.3458,57.5
+AVEX,AEVEX Corp.,buy,1.6,9,14.93,32.77778,119.5

@@ -1,0 +1,8 @@
+Ticker,Company,RecommendationKey,RecommendationMean,NumAnalysts,Price,TargetMeanPrice,UpsidePct
+CWEN,"Clearway Energy, Inc.",strong_buy,1.38462,13,29.27,41.61538,42.2
+SUZLON.NS,SUZLON ENERGY LIMITED,strong_buy,1.38462,13,39.49,62.25846,57.7
+600900.SS,CHINA YANGTZE POWER CO,strong_buy,1.4375,12,28.54,32.7575,14.8
+NXT,Nextpower Inc.,strong_buy,1.44828,28,77.93,139.17857,78.6
+ENGI11.SA,ENERGISA    UNT     N2,strong_buy,1.5,13,52.97,65.54077,23.7
+EDP.LS,"EDP, SA",buy,1.68182,22,4.843,5.21136,7.6
+NDX1.DE,Nordex SE                     I,buy,1.73333,15,39.16,49.30667,25.9
